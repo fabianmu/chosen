@@ -498,7 +498,10 @@ class Chosen extends AbstractChosen
         @mouse_on_container = false
         break
       when 13
-        evt.preventDefault() if this.results_showing
+        if this.results_showing
+            evt.preventDefault()
+        else
+            $(@form_field).parent('form').trigger('submit') if @submit_parent_form_on_return
         break
       when 32
         evt.preventDefault() if @disable_search
